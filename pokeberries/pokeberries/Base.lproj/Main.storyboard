@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2ss-Qx-daD">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Berry Radar Chart-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController title="Berry Radar Chart" id="BYZ-38-t0r" customClass="BerryViewController" customModule="pokeberries" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YvQ-Qj-uS4">
+                                <rect key="frame" x="0.0" y="388" width="375" height="279"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wqt-Qr-1S8" customClass="RadarChartView" customModule="Charts">
+                                <rect key="frame" x="7" y="20" width="360" height="360"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wqt-Qr-1S8" secondAttribute="height" multiplier="1:1" id="bGw-3n-RKM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wqt-Qr-1S8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="78N-sR-29e"/>
+                            <constraint firstItem="Wqt-Qr-1S8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GRM-9U-wIs"/>
+                            <constraint firstItem="Wqt-Qr-1S8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-9" id="YLG-H8-czx"/>
+                            <constraint firstItem="YvQ-Qj-uS4" firstAttribute="centerX" secondItem="Wqt-Qr-1S8" secondAttribute="centerX" id="b72-Ev-PHq"/>
+                            <constraint firstItem="YvQ-Qj-uS4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iLG-et-4c0"/>
+                            <constraint firstItem="YvQ-Qj-uS4" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="mIm-nw-uLk"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Wqt-Qr-1S8" secondAttribute="bottom" priority="999" constant="287" id="tDx-U8-3MS"/>
+                            <constraint firstItem="YvQ-Qj-uS4" firstAttribute="top" secondItem="Wqt-Qr-1S8" secondAttribute="bottom" constant="8" symbolic="YES" id="zbH-zw-xcS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="pPG-fo-rkv"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="chartView" destination="Wqt-Qr-1S8" id="OPa-a8-seW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1056.5" y="311.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tL1-9R-p5V">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2ss-Qx-daD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wO0-KC-fsX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="j3q-Pd-1za"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FWp-Of-iQW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="244" y="311"/>
+        </scene>
+    </scenes>
+</document>
