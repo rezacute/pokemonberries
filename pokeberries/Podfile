@@ -5,11 +5,11 @@ platform :ios, '9.0'
 inhibit_all_warnings!
 use_frameworks!
 target 'pokeberries' do
-  pod 'Material', '~> 1.0'
+  pod 'Material', '1.41.2'
   pod 'PokemonKit'
   pod 'AlamofireImage', '~> 2.0'
   pod 'Persei', '~> 2.0.1'
-  pod 'RealmSwift'
+  pod 'RealmSwift', '0.103.1'
   pod 'Charts/Realm'
   pod 'ARSLineProgress', '~> 1.0'
   target 'pokeberriesTests' do

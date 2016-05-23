@@ -38,9 +38,11 @@ class TriangeView : UIView {
 class BerryViewController: UIViewController, ChartViewDelegate {
 
     var idx = 0
+    var max = 2
 
     @IBOutlet weak var chartView: RadarChartView!
     var pBerry : Berry?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +56,7 @@ class BerryViewController: UIViewController, ChartViewDelegate {
             return
         }
         pBerry = berries[0]
+        max = berries.count
 
 
         prepareChart()
@@ -83,7 +86,7 @@ class BerryViewController: UIViewController, ChartViewDelegate {
             cardView?.leftButtons = []
         }
 
-        if idx < 19 {
+        if idx < (max - 1) {
             // No button.
             let btn2: FlatButton = FlatButton()
             btn2.pulseColor = MaterialColor.blue.lighten1
@@ -108,13 +111,13 @@ class BerryViewController: UIViewController, ChartViewDelegate {
         chartView.layer.shadowOpacity = 1
         chartView.layer.shadowOffset = CGSizeZero
         chartView.layer.shadowRadius = 10
-        let cardView: CardView = CardView(frame: CGRectMake(5, (chartView.frame.size.height)+20, chartView.frame.size.width + 5, 150))
+        let cardView: CardView = CardView(frame: CGRectMake(5, (chartView.frame.size.height)+20, chartView.frame.size.width + 10, 150))
 
 
         titleLabel.text = pBerry?.name.capitalizedString
         titleLabel.textColor = MaterialColor.blue.darken1
         titleLabel.font = RobotoFont.mediumWithSize(20)
-        cardView.titleLabel = titleLabel
+
 
         // Detail label.
 
@@ -123,14 +126,34 @@ class BerryViewController: UIViewController, ChartViewDelegate {
         }
 
         detailLabel.numberOfLines = 0
-        cardView.shadowOpacity = 0.0
-        cardView.detailView = detailLabel
+
 
         self.cardView = cardView
         Manager.sharedInstance.completionBlock = {
-            self.view.addSubview(cardView)
-            self.defineButtons()
-            self.chartView.animate(xAxisDuration: 1, easingOption: .EaseInOutBounce)
+            dispatch_async(dispatch_get_main_queue(), {
+                guard let realm = try? Realm() else {
+                    return
+                }
+
+                let berries = realm.objects(Berry)
+                if  berries.count == 0 {
+                    return
+                }
+                self.pBerry = berries[0]
+                self.max = berries.count
+                self.titleLabel.text = self.pBerry?.name.capitalizedString
+                cardView.titleLabel = self.titleLabel
+                if let giftPower = self.pBerry?.naturalGiftPower {
+                    self.detailLabel.text = "Natural Gift Power : \(giftPower)"
+                }
+                cardView.shadowOpacity = 0.0
+                cardView.contentView = self.detailLabel
+                self.prepareChart()
+                self.defineButtons()
+                self.view.addSubview(cardView)
+                self.chartView.animate(xAxisDuration: 1, easingOption: .EaseInOutBounce)
+            })
+
         }
 
 
@@ -144,6 +167,7 @@ class BerryViewController: UIViewController, ChartViewDelegate {
         }
         idx += 1
         let berries = realm.objects(Berry)
+        max = berries.count
         pBerry = berries[idx]
         prepareChart()
         defineButtons()
@@ -160,6 +184,7 @@ class BerryViewController: UIViewController, ChartViewDelegate {
         idx -= 1
         let berries = realm.objects(Berry)
         pBerry = berries[idx]
+        max = berries.count
         prepareChart()
         defineButtons()
         titleLabel.text = pBerry?.name.capitalizedString

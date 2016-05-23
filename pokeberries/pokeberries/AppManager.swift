@@ -27,11 +27,12 @@ class Manager {
     private func setDefaultRealmForUser(username: String) {
         var config = Realm.Configuration()
 
+
         // Use the default directory, but replace the filename with the username
-        config.path = NSURL.fileURLWithPath(config.path!)
+        config.fileURL = config.fileURL?
             .URLByDeletingLastPathComponent?
             .URLByAppendingPathComponent("\(username).realm")
-            .path
+
 
         // Set this as the configuration used for the default Realm
         Realm.Configuration.defaultConfiguration = config
@@ -61,7 +62,7 @@ class Manager {
                         realm.add(berry)
                         dispatch_async(dispatch_get_main_queue(), { 
                             self.currentLoaded += 1
-                            if self.currentLoaded == self.maxFetch {
+                            if self.currentLoaded == 2 {
                                 ARSLineProgress.showSuccess()
                                 self.completionBlock?()
                             }
